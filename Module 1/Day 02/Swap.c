@@ -1,28 +1,23 @@
 #include <stdio.h>
 
-void swap(void *a, void *b, size_t size) {
-    char *temp = (char *)malloc(size);
-    memcpy(temp, a, size);
-    memcpy(a, b, size);
-    memcpy(b, temp, size);
-    free(temp);
+void swap_data(void *a, void *b) {
+   unsigned char *p1 = (unsigned char *)a;
+  unsigned char *p2 = (unsigned char *)b;
+    unsigned char temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+    p1++;
+    p2++;
+  }
 }
 
 int main() {
-    int a = 10, b = 20;
-    printf("Before swap: a = %d, b = %d\n", a, b);
-    swap(&a, &b, sizeof(int));
-    printf("After swap: a = %d, b = %d\n", a, b);
-    
-    double x = 1.5, y = 2.5;
-    printf("Before swap: x = %lf, y = %lf\n", x, y);
-    swap(&x, &y, sizeof(double));
-    printf("After swap: x = %lf, y = %lf\n", x, y);
-    
-    char c1 = 'A', c2 = 'B';
-    printf("Before swap: c1 = %c, c2 = %c\n", c1, c2);
-    swap(&c1, &c2, sizeof(char));
-    printf("After swap: c1 = %c, c2 = %c\n", c1, c2);
-    
-    return 0;
+  int a = 10;
+  char b = 'A';
+
+  swap_data(&a, &b);
+  printf("a = %d\n", a);
+  printf("b = %c\n", b);
+
+  return 0;
 }
